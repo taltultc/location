@@ -5,7 +5,17 @@
     version="1">
 
     <name>Geo Fencing Plugin</name>
+ 
 
+  <description>
+    Get location of the user on background mode
+  </description>
+
+  <license>MIT</license>
+
+  <engines>
+    <engine name="cordova" version=">=3.0.0"/>
+  </engines>
     <asset src="www/DGGeofencing.js" target="DGGeofencing.js" />
 
     
