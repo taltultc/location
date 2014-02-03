@@ -24,10 +24,10 @@
         <plugins-plist key="DGGeofencing"
                     string="DGGeofencing" />
 
-        <header-file src="DGGeofencing.h" />
-        <header-file src="DGGeofencingHelper.h" />
+        <header-file src="src/ios/DGGeofencing/DGGeofencing.h" />
+        <header-file src="src/ios/DGGeofencing/DGGeofencingHelper.h" />
 
-        <source-file src="DGGeofencing.m" />
-        <source-file src="DGGeofencingHelper.m" />
+        <source-file src="src/ios/DGGeofencing/DGGeofencing.m" />
+        <source-file src="src/ios/DGGeofencing/DGGeofencingHelper.m" />
     </platform>
 </plugin>
