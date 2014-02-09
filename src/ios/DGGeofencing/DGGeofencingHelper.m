@@ -46,7 +46,7 @@ static DGGeofencingHelper *sharedGeofencingHelper = nil;
 - (void) saveGeofenceCallbackId:(NSString *) callbackId {
     NSLog(@"callbackId: %@", callbackId);
     if (!self.locationData) {
-        self.locationData = [[[DGLocationData alloc] init] autorelease];
+        self.locationData = [[DGLocationData alloc] init];
     }
     
     DGLocationData* lData = self.locationData;
@@ -61,7 +61,7 @@ static DGGeofencingHelper *sharedGeofencingHelper = nil;
 - (void) saveLocationCallbackId:(NSString *) callbackId {
     NSLog(@"callbackId: %@", callbackId);
     if (!self.locationData) {
-        self.locationData = [[[DGLocationData alloc] init] autorelease];
+        self.locationData = [[DGLocationData alloc] init];
     }
     
     DGLocationData* lData = self.locationData;
@@ -259,10 +259,7 @@ static DGGeofencingHelper *sharedGeofencingHelper = nil;
 
 - (void) dispose {
     locationManager.delegate = nil;
-    [locationManager release];
     self.locationData = nil;
-    [locationData release];
-    [sharedGeofencingHelper release];
 }
 
 + (NSString*) applicationDocumentsDirectory
