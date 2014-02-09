@@ -33,21 +33,21 @@ typedef NSInteger DGLocationAccuracy;
 // simple ojbect to keep track of location information
 @interface DGLocationData : NSObject
 
-@property (nonatomic, assign) DGLocationStatus locationStatus;
-@property (nonatomic, retain) CLLocation* locationInfo;
-@property (nonatomic, retain) NSMutableArray* locationCallbacks;
-@property (nonatomic, retain) NSMutableArray* geofenceCallbacks;
+@property (nonatomic) DGLocationStatus locationStatus;
+@property (nonatomic) CLLocation* locationInfo;
+@property (nonatomic) NSMutableArray* locationCallbacks;
+@property (nonatomic) NSMutableArray* geofenceCallbacks;
 
 @end
 
 @class CDVCordovaView;
 @interface DGGeofencingHelper : NSObject <CLLocationManagerDelegate>
 
-@property (nonatomic, retain) CLLocationManager *locationManager;
-@property (nonatomic, assign) CDVCordovaView *webView;
-@property (nonatomic, assign) BOOL didLaunchForRegionUpdate;
-@property (nonatomic, retain) DGLocationData* locationData;
-@property (nonatomic, assign) id <CDVCommandDelegate> commandDelegate;
+@property (nonatomic) CLLocationManager *locationManager;
+@property (nonatomic) CDVCordovaView *webView;
+@property (nonatomic) BOOL didLaunchForRegionUpdate;
+@property (nonatomic) DGLocationData* locationData;
+@property (nonatomic) id <CDVCommandDelegate> commandDelegate;
 
 +(DGGeofencingHelper*)sharedGeofencingHelper;
 
