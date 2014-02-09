@@ -283,7 +283,6 @@
     CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([latitude doubleValue], [longitude doubleValue]);
     CLRegion *region = [[CLRegion alloc] initCircularRegionWithCenter:coord radius:radius identifier:regionId];
     [[[DGGeofencingHelper sharedGeofencingHelper] locationManager] startMonitoringForRegion:region desiredAccuracy:kCLLocationAccuracyBestForNavigation];
-    [region release];
 }
 
 - (void) removeRegionToMonitor:(NSMutableDictionary *)params {
@@ -295,7 +294,6 @@
     CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([latitude doubleValue], [longitude doubleValue]);
     CLRegion *region = [[CLRegion alloc] initCircularRegionWithCenter:coord radius:10.0 identifier:regionId];
     [[[DGGeofencingHelper sharedGeofencingHelper] locationManager] stopMonitoringForRegion:region];
-    [region release];
 }
 
 - (void)removeRegion:(CDVInvokedUrlCommand*)command {
