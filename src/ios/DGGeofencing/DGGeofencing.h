@@ -1,40 +1,63 @@
-//
-//  Geofencing.h
-//  TikalTimeTracker
-//  Sections of this code adapted from Apache Cordova
-//
-//  Created by Dov Goldberg on 5/3/12.
-//  Copyright (c) 2012 Ogonium. All rights reserved.
-//
 
-#import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-
 #import <Cordova/CDVPlugin.h>
 
-#import "DGGeofencingHelper.h"
+enum DGLocationStatus {
+    PERMISSIONDENIED = 1,
+    POSITIONUNAVAILABLE,
+    TIMEOUT
+};
+typedef NSUInteger DGLocationStatus;
 
-#define KEY_REGION_ID       @"fid"
-#define KEY_REGION_LAT      @"latitude"
-#define KEY_REGION_LNG      @"longitude"
-#define KEY_REGION_RADIUS   @"radius"
-#define KEY_REGION_ACCURACY @"accuracy"
+enum DGGeofencingStatus {
+    GEOFENCINGPERMISSIONDENIED = 4,
+    GEOFENCINGUNAVAILABLE=5,
+    GEOFENCINGTIMEOUT=6
+};
+typedef NSUInteger DGGeofencingStatus;
 
-@interface DGGeofencing : CDVPlugin <CLLocationManagerDelegate>
+
+// simple object to keep track of location information
+@interface DGLocationData : NSObject {
+    DGLocationStatus locationStatus;
+    DGGeofencingStatus geofencingStatus;
+    NSMutableArray* locationCallbacks;
+    NSMutableArray* geofencingCallbacks;
+    CLLocation* locationInfo;
+}
+
+@property (nonatomic, assign) DGLocationStatus locationStatus;
+@property (nonatomic, assign) DGGeofencingStatus geofencingStatus;
+@property (nonatomic, strong) CLLocation* locationInfo;
+@property (nonatomic, strong) NSMutableArray* locationCallbacks;
+@property (nonatomic, strong) NSMutableArray* geofencingCallbacks;
+
+@end
+
+//=====================================================
+// DGGeofencing
+//=====================================================
+
+@interface DGGeofencing : CDVPlugin <CLLocationManagerDelegate> {
+    @private BOOL __locationStarted;
+    @private BOOL __highAccuracyEnabled;
+    DGLocationData* locationData;
+}
+
+@property (nonatomic, strong) CLLocationManager* locationManager;
+@property (nonatomic, strong) DGLocationData* locationData;
 
 - (BOOL) isLocationServicesEnabled;
 - (BOOL) isAuthorized;
 - (BOOL) isRegionMonitoringAvailable;
 - (BOOL) isRegionMonitoringEnabled;
 - (BOOL) isSignificantLocationChangeMonitoringAvailable;
-- (void) addRegionToMonitor:(NSMutableDictionary *)params;
-- (void) removeRegionToMonitor:(NSMutableDictionary *)params;
-
 
 #pragma mark Plugin Functions
-- (void) addRegion:(CDVInvokedUrlCommand*)command;
-- (void) removeRegion:(CDVInvokedUrlCommand*)command;
-- (void) getWatchedRegionIds:(CDVInvokedUrlCommand*)command;
+- (void) initCallbackForRegionMonitoring:(CDVInvokedUrlCommand*)command;
+- (void) startMonitoringRegion:(CDVInvokedUrlCommand*)command;
+- (void) stopMonitoringRegion:(CDVInvokedUrlCommand*)command;
+- (void) getMonitoredRegionIds:(CDVInvokedUrlCommand*)command;
 - (void) getPendingRegionUpdates:(CDVInvokedUrlCommand*)command;
 - (void) startMonitoringSignificantLocationChanges:(CDVInvokedUrlCommand*)command;
 - (void) stopMonitoringSignificantLocationChanges:(CDVInvokedUrlCommand*)command;
