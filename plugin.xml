@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    id="com.locationiosnew9.Dfencing"
+    id="com.location9.Dfencing"
     version="1">
 
     <name>Geo Fencing Plugin</name>
@@ -25,9 +25,7 @@
                     string="DGGeofencing" />
 
         <header-file src="src/ios/DGGeofencing/DGGeofencing.h" />
-        <header-file src="src/ios/DGGeofencing/DGGeofencingHelper.h" />
-
         <source-file src="src/ios/DGGeofencing/DGGeofencing.m" />
-        <source-file src="src/ios/DGGeofencing/DGGeofencingHelper.m" />
+
     </platform>
 </plugin>
